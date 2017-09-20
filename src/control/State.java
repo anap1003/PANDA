@@ -17,7 +17,7 @@ public class State {
     
     private HashInfo selectedHash;
     
-    private String kPlus, message;
+    private String key, truncKey, kPlus, message;
     private String ipad, opad;
     private String Si, So;
     private String firstHResult, secondHResult;
@@ -28,18 +28,13 @@ public class State {
         
     }
     
-    private String makeIpad() {
-        if (ipad == null || "".equals(ipad)) {
-            ipad = makePad("36");
-        }
-        return ipad;
+    private void makeIpad() {
+        ipad = makePad("36");
     }
     
-    private String makeOpad() {
-        if (opad == null || "".equals(opad)) {
-            opad = makePad("5C");
-        }
-        return opad;
+    private void makeOpad() {
+        opad = makePad("5C");
+        
     }
     
     private String makePad(String val) {
@@ -212,7 +207,21 @@ public class State {
     public void setSecondHResult(String secondHResult) {
         this.secondHResult = secondHResult;
     }
-    
-    
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getTruncKey() {
+        return truncKey;
+    }
+
+    public void setTruncKey(String truncKey) {
+        this.truncKey = truncKey;
+    }
     
 }

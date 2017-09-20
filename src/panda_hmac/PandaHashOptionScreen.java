@@ -77,7 +77,7 @@ public class PandaHashOptionScreen {
 
         Button btn = new Button();
         btn.setStyle("-fx-font: 16 arial;");
-        btn.setText("Dopunjavanje");
+        btn.setText("Skraćivanje/Dopunjavanje");
         btn.setOnAction((ActionEvent event) -> {
             if (msgField.getText() == null) {
                 msgField.setText("");
@@ -85,20 +85,22 @@ public class PandaHashOptionScreen {
             if (keyField.getText() == null) {
                 keyField.setText("");
             }
-            if (msgField.getText().matches("([0-9]|[a-f]|[A-F])+")) {
+            if (msgField.getText().matches("([0-9]|[a-f]|[A-F])*")) {
                 if (keyField.getText().matches("([0-9]|[a-f]|[A-F])+")) {
 
                     if (msgField.getText().length() % 2 > 0) {
-                        errorLabel.setText("Poruka mora sadrzati parni broj karaktera!");
+                        errorLabel.setText("Poruka mora sadržati parni broj karaktera!");
                     } else {
 
                         State.getInstance().setSelectedHash((String) comboBox.getValue());
                         State.getInstance().setMessage(msgField.getText().toUpperCase());
+                        State.getInstance().setKey(keyField.getText().toUpperCase());
+                        State.getInstance().setTruncKey(null);
 
                         if (keyField.getText().length() > State.getInstance().getSelectedHash().getBlockSizeInHex()) {
-                            SceneChanger.changeScene((new PandaKeyTruncateScreen()).getScreen(keyField.getText().toUpperCase()));
+                            SceneChanger.changeScene((new PandaKeyTruncateScreen()).getScreen());
                         } else {
-                            SceneChanger.changeScene((new PandaKeyPaddingScreen()).getScreen(keyField.getText().toUpperCase()));
+                            SceneChanger.changeScene((new PandaKeyPaddingScreen()).getScreen());
                         }
                     }
                 } else {

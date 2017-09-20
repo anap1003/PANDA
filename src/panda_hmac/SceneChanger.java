@@ -33,9 +33,9 @@ public class SceneChanger {
         stage.setScene(scene);
     }
     
-    public static void changeScene(TabPane tabPane) {
+    /*public static void changeScene(TabPane tabPane) {
         Scene scene = new Scene(tabPane, PANDA_HMAC.WIDTH, PANDA_HMAC.HEIGHT);
         stage.setScene(scene);
-    }
+    }*/
     
 }

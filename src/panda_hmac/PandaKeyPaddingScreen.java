@@ -23,9 +23,17 @@ public class PandaKeyPaddingScreen {
     
     private LabelMatrix labelMatrix;
 
-    public BorderPane getScreen(String key) {
+    public BorderPane getScreen() {
+        String key;
+        String truncKey = State.getInstance().getTruncKey();
+        if (truncKey != null) {
+            key = truncKey;
+        } else {
+            key = State.getInstance().getKey();
+        }
+        
         Label paddedMessageLabel = new Label("Ključ dopunjen do b bita input-a hash funkcije:");
-        paddedMessageLabel.setStyle("-fx-font: 20 arial;");
+        paddedMessageLabel.setStyle("-fx-font: 30 arial;");
         
         Button simBtn = new Button("Simulacija");
         simBtn.setOnAction((ActionEvent event) -> {
@@ -37,7 +45,11 @@ public class PandaKeyPaddingScreen {
         
         Button backBtn = new Button("Nazad");
         backBtn.setOnAction((ActionEvent event) -> {
-            SceneChanger.changeScene((new PandaHashOptionScreen()).getScreen());
+            if (truncKey != null) {
+                SceneChanger.changeScene((new PandaKeyTruncateScreen()).getScreen());
+            } else {
+                SceneChanger.changeScene((new PandaHashOptionScreen()).getScreen());
+            }
         });
         backBtn.setPrefWidth(0.12 * PANDA_HMAC.WIDTH);
         backBtn.setStyle("-fx-font: 16 arial;");
@@ -64,8 +76,8 @@ public class PandaKeyPaddingScreen {
             matrix.add(labelMatrix.getLabel(i/columns, i%columns), i%columns, i/columns);
         }
         matrix.setAlignment(Pos.CENTER);
-        matrix.setVgap(5);
-        matrix.setHgap(5);
+        matrix.setVgap(20);
+        matrix.setHgap(20);
         
         vBox.getChildren().add(matrix);
         

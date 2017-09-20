@@ -15,6 +15,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -25,7 +26,7 @@ import javafx.scene.layout.VBox;
  */
 public class PandaHMACScreen {
 
-    public VBox getScreen() {
+    public BorderPane getScreen() {
         TabPane tabPane = new TabPane();
 
         tabPane.getTabs().add(createSiTab());
@@ -42,7 +43,7 @@ public class PandaHMACScreen {
 
         Button backBtn = new Button("Nazad");
         backBtn.setOnAction((ActionEvent event) -> {
-            SceneChanger.changeScene((new PandaKeyPaddingScreen()).getScreen(State.getInstance().getkPlus()));
+            SceneChanger.changeScene((new PandaKeyPaddingScreen()).getScreen());
         });
         backBtn.setPrefWidth(0.12 * PANDA_HMAC.WIDTH);
         backBtn.setStyle("-fx-font: 16 arial;");
@@ -50,19 +51,22 @@ public class PandaHMACScreen {
         GridPane grid = new GridPane();
         grid.setVgap(40);
         grid.setHgap(30);
-        grid.setPadding(new Insets(0, 0, 0, 0));
+        grid.setPadding(new Insets(0, 0, 10, 0));
         grid.setAlignment(Pos.CENTER);
         grid.add(backBtn, 0, 0);
         grid.add(simBtn, 1, 0);
 
-        VBox vBox = new VBox();
+        /*VBox vBox = new VBox();
         vBox.setSpacing(50);
         vBox.setAlignment(Pos.CENTER);
 
         vBox.getChildren().add(tabPane);
         vBox.getChildren().add(grid);
 
-        return vBox;
+        return vBox;*/
+        BorderPane borderPane = new BorderPane(null, tabPane, null, grid, null);
+
+        return borderPane;
     }
 
     private Tab createSiTab() {
@@ -73,9 +77,15 @@ public class PandaHMACScreen {
         int columns = State.getInstance().getSelectedHash().getBlockColumns();
 
         VBox vBox = new VBox();
-        vBox.setSpacing(40);
+        vBox.setSpacing(20);
         vBox.setAlignment(Pos.CENTER);
         vBox.setPadding(new Insets(20, 0, 0, 0));
+
+        Label expLabel = new Label("Si = K⁺ ^ ipad");
+        expLabel.setAlignment(Pos.CENTER);
+        expLabel.setStyle("-fx-font: 30 arial");
+
+        vBox.getChildren().add(expLabel);
 
         HBox hBox = new HBox();
         hBox.setSpacing(30);
@@ -88,7 +98,7 @@ public class PandaHMACScreen {
         kPlusMatrix.setAlignment(Pos.CENTER);
         kPlusMatrix.setVgap(5);
         kPlusMatrix.setHgap(5);
-        
+
         hBox.getChildren().add(kPlusMatrix);
 
         Label xorLabel = new Label("XOR");
@@ -114,7 +124,6 @@ public class PandaHMACScreen {
         eqLabel.setStyle("-fx-font: 30 arial;");
         vBox.getChildren().add(eqLabel);
 
-        
         labelMatrix = new LabelMatrix(State.getInstance().getSi(), cells, columns);
         GridPane SiMatrix = new GridPane();
         for (int i = 0; i < cells; i++) {
@@ -125,7 +134,7 @@ public class PandaHMACScreen {
         SiMatrix.setHgap(5);
 
         vBox.getChildren().add(SiMatrix);
-        
+
         tab.setContent(vBox);
         tab.setClosable(false);
 
@@ -140,9 +149,15 @@ public class PandaHMACScreen {
         int columns = State.getInstance().getSelectedHash().getBlockColumns();
 
         VBox vBox = new VBox();
-        vBox.setSpacing(40);
+        vBox.setSpacing(20);
         vBox.setAlignment(Pos.CENTER);
         vBox.setPadding(new Insets(20, 0, 0, 0));
+
+        Label expLabel = new Label("So = K⁺ ^ opad");
+        expLabel.setAlignment(Pos.CENTER);
+        expLabel.setStyle("-fx-font: 30 arial");
+
+        vBox.getChildren().add(expLabel);
 
         HBox hBox = new HBox();
         hBox.setSpacing(30);
@@ -208,6 +223,13 @@ public class PandaHMACScreen {
         VBox vBox = new VBox();
         vBox.setSpacing(50);
         vBox.setAlignment(Pos.CENTER);
+        vBox.setPadding(new Insets(20, 0, 0, 0));
+        
+        Label expLabel = new Label("T = H(Si || poruka)");
+        expLabel.setAlignment(Pos.CENTER);
+        expLabel.setStyle("-fx-font: 30 arial");
+
+        vBox.getChildren().add(expLabel);
 
         HBox hBox = new HBox();
         hBox.setSpacing(30);
@@ -268,7 +290,7 @@ public class PandaHMACScreen {
         });
         vBox.getChildren().add(hashBtn);
         cells = State.getInstance().getSelectedHash().getDigestCells();
-        columns = State.getInstance().getSelectedHash().getDigestCells();
+        columns = State.getInstance().getSelectedHash().getDigestColumns();
         LabelMatrix labelMatrix = new LabelMatrix(State.getInstance().getFirstHResult(), cells, columns);
         GridPane firstHMatrix = new GridPane();
         for (int i = 0; i < cells; i++) {
@@ -297,6 +319,13 @@ public class PandaHMACScreen {
         VBox vBox = new VBox();
         vBox.setSpacing(50);
         vBox.setAlignment(Pos.CENTER);
+        vBox.setPadding(new Insets(20, 0, 0, 0));
+        
+        Label expLabel = new Label("HMAC = H(So || T)");
+        expLabel.setAlignment(Pos.CENTER);
+        expLabel.setStyle("-fx-font: 30 arial");
+
+        vBox.getChildren().add(expLabel);
 
         HBox hBox = new HBox();
         hBox.setSpacing(30);
@@ -357,7 +386,7 @@ public class PandaHMACScreen {
         });
         vBox.getChildren().add(hashBtn);
         cells = State.getInstance().getSelectedHash().getDigestCells();
-        columns = State.getInstance().getSelectedHash().getDigestCells();
+        columns = State.getInstance().getSelectedHash().getDigestColumns();
         LabelMatrix labelMatrix = new LabelMatrix(State.getInstance().getSecondHResult(), cells, columns);
         GridPane firstHMatrix = new GridPane();
         for (int i = 0; i < cells; i++) {

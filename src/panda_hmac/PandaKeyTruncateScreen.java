@@ -21,19 +21,21 @@ import javafx.scene.layout.VBox;
  */
 public class PandaKeyTruncateScreen {
     
-    public BorderPane getScreen(String key) {
+    public BorderPane getScreen() {
+        String key = State.getInstance().getKey();
         String newKey = State.getInstance().getSelectedHash().getHashValue(key);
+        State.getInstance().setTruncKey(newKey);
         
         int cells = State.getInstance().getSelectedHash().getDigestCells();
         int columns = State.getInstance().getSelectedHash().getDigestColumns();
         int length = columns - 1;
         
         Label paddedMessageLabel = new Label("Skraćivanje ključa na n bita izlaza heš funkcije:");
-        paddedMessageLabel.setStyle("-fx-font: 20 arial;");
+        paddedMessageLabel.setStyle("-fx-font: 30 arial;");
         
         Button simBtn = new Button("Dopunjavanje");
         simBtn.setOnAction((ActionEvent event) -> {
-            SceneChanger.changeScene((new PandaKeyPaddingScreen()).getScreen(newKey));
+            SceneChanger.changeScene((new PandaKeyPaddingScreen()).getScreen());
         });
         simBtn.setPrefWidth(0.12 * PANDA_HMAC.WIDTH);
         simBtn.setStyle("-fx-font: 16 arial;");
@@ -48,7 +50,7 @@ public class PandaKeyTruncateScreen {
         GridPane grid = new GridPane();
         grid.setVgap(40);
         grid.setHgap(30);
-        grid.setPadding(new Insets(0, 0, 0, 0));
+        grid.setPadding(new Insets(0, 0, 10, 0));
         grid.setAlignment(Pos.CENTER);
         grid.add(backBtn, 0, 0);
         grid.add(simBtn, 1, 0);
