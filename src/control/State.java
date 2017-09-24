@@ -22,8 +22,6 @@ public class State {
     private String Si, So;
     private String firstHResult, secondHResult;
     
-    private String hmac;
-    
     private State() {
         
     }
@@ -109,6 +107,22 @@ public class State {
         return '0';
     }
     
+    public void calculateHMAC() {
+        System.out.println("K0 IS: " + kPlus);
+        makeIpad();
+        System.out.println("IPAD IS: " + ipad);
+        makeOpad();
+        System.out.println("OPAD IS: " + opad);
+        calcSi();
+        System.out.println("Si IS: " + Si);
+        calcSo();
+        System.out.println("So IS: " + So);
+        firstHResult = selectedHash.getHashValue(Si + message);
+        System.out.println("HASH IS: " + firstHResult);
+        secondHResult = selectedHash.getHashValue(So + firstHResult);
+        System.out.println("HASH IS: " + secondHResult);
+    }
+
     public static State getInstance() {
         if (state == null) {
             state = new State();
@@ -144,22 +158,6 @@ public class State {
         this.message = message;
     }
     
-    public void calculateAll() {
-        System.out.println("K0 IS: " + kPlus);
-        makeIpad();
-        System.out.println("IPAD IS: " + ipad);
-        makeOpad();
-        System.out.println("OPAD IS: " + opad);
-        calcSi();
-        System.out.println("Si IS: " + Si);
-        calcSo();
-        System.out.println("So IS: " + So);
-        firstHResult = selectedHash.getHashValue(Si + message);
-        System.out.println("HASH IS: " + firstHResult);
-        secondHResult = selectedHash.getHashValue(So + firstHResult);
-        System.out.println("HASH IS: " + secondHResult);
-    }
-
     public String getIpad() {
         return ipad;
     }

@@ -56,14 +56,6 @@ public class PandaHMACScreen {
         grid.add(backBtn, 0, 0);
         grid.add(simBtn, 1, 0);
 
-        /*VBox vBox = new VBox();
-        vBox.setSpacing(50);
-        vBox.setAlignment(Pos.CENTER);
-
-        vBox.getChildren().add(tabPane);
-        vBox.getChildren().add(grid);
-
-        return vBox;*/
         BorderPane borderPane = new BorderPane(null, tabPane, null, grid, null);
 
         return borderPane;
@@ -90,10 +82,10 @@ public class PandaHMACScreen {
         HBox hBox = new HBox();
         hBox.setSpacing(30);
 
-        LabelMatrix labelMatrix = new LabelMatrix(State.getInstance().getkPlus(), cells, columns);
+        LabelMatrix kPlusLabelMatrix = new LabelMatrix(State.getInstance().getkPlus(), cells, columns);
         GridPane kPlusMatrix = new GridPane();
         for (int i = 0; i < cells; i++) {
-            kPlusMatrix.add(labelMatrix.getLabel(i / columns, i % columns), i % columns, i / columns);
+            kPlusMatrix.add(kPlusLabelMatrix.getLabel(i / columns, i % columns), i % columns, i / columns);
         }
         kPlusMatrix.setAlignment(Pos.CENTER);
         kPlusMatrix.setVgap(5);
@@ -105,10 +97,10 @@ public class PandaHMACScreen {
         xorLabel.setStyle("-fx-font: 20 arial;");
         hBox.getChildren().add(xorLabel);
 
-        labelMatrix = new LabelMatrix(State.getInstance().getIpad(), cells, columns);
+        LabelMatrix ipadLabelMatrix = new LabelMatrix(State.getInstance().getIpad(), cells, columns);
         GridPane ipadMatrix = new GridPane();
         for (int i = 0; i < cells; i++) {
-            ipadMatrix.add(labelMatrix.getLabel(i / columns, i % columns), i % columns, i / columns);
+            ipadMatrix.add(ipadLabelMatrix.getLabel(i / columns, i % columns), i % columns, i / columns);
         }
         ipadMatrix.setAlignment(Pos.CENTER);
         ipadMatrix.setVgap(5);
@@ -124,10 +116,10 @@ public class PandaHMACScreen {
         eqLabel.setStyle("-fx-font: 30 arial;");
         vBox.getChildren().add(eqLabel);
 
-        labelMatrix = new LabelMatrix(State.getInstance().getSi(), cells, columns);
+        LabelMatrix SiLabelMatrix = new LabelMatrix(State.getInstance().getSi(), cells, columns);
         GridPane SiMatrix = new GridPane();
         for (int i = 0; i < cells; i++) {
-            SiMatrix.add(labelMatrix.getLabel(i / columns, i % columns), i % columns, i / columns);
+            SiMatrix.add(SiLabelMatrix.getLabel(i / columns, i % columns), i % columns, i / columns);
         }
         SiMatrix.setAlignment(Pos.CENTER);
         SiMatrix.setVgap(5);
@@ -137,6 +129,8 @@ public class PandaHMACScreen {
 
         tab.setContent(vBox);
         tab.setClosable(false);
+        
+        LabelMatrix.setHoverEffects(kPlusLabelMatrix, ipadLabelMatrix, SiLabelMatrix, cells, columns);
 
         return tab;
     }
@@ -162,10 +156,10 @@ public class PandaHMACScreen {
         HBox hBox = new HBox();
         hBox.setSpacing(30);
 
-        LabelMatrix labelMatrix = new LabelMatrix(State.getInstance().getkPlus(), cells, columns);
+        LabelMatrix kPlusLabelMatrix = new LabelMatrix(State.getInstance().getkPlus(), cells, columns);
         GridPane kPlusMatrix = new GridPane();
         for (int i = 0; i < cells; i++) {
-            kPlusMatrix.add(labelMatrix.getLabel(i / columns, i % columns), i % columns, i / columns);
+            kPlusMatrix.add(kPlusLabelMatrix.getLabel(i / columns, i % columns), i % columns, i / columns);
         }
         kPlusMatrix.setAlignment(Pos.CENTER);
         kPlusMatrix.setVgap(5);
@@ -176,10 +170,10 @@ public class PandaHMACScreen {
         xorLabel.setStyle("-fx-font: 20 arial;");
         hBox.getChildren().add(xorLabel);
 
-        labelMatrix = new LabelMatrix(State.getInstance().getOpad(), cells, columns);
+        LabelMatrix opadLabelMatrix = new LabelMatrix(State.getInstance().getOpad(), cells, columns);
         GridPane opadMatrix = new GridPane();
         for (int i = 0; i < cells; i++) {
-            opadMatrix.add(labelMatrix.getLabel(i / columns, i % columns), i % columns, i / columns);
+            opadMatrix.add(opadLabelMatrix.getLabel(i / columns, i % columns), i % columns, i / columns);
         }
         opadMatrix.setAlignment(Pos.CENTER);
         opadMatrix.setVgap(5);
@@ -195,10 +189,10 @@ public class PandaHMACScreen {
         eqLabel.setStyle("-fx-font: 30 arial;");
         vBox.getChildren().add(eqLabel);
 
-        labelMatrix = new LabelMatrix(State.getInstance().getSo(), cells, columns);
+        LabelMatrix SoLabelMatrix = new LabelMatrix(State.getInstance().getSo(), cells, columns);
         GridPane SoMatrix = new GridPane();
         for (int i = 0; i < cells; i++) {
-            SoMatrix.add(labelMatrix.getLabel(i / columns, i % columns), i % columns, i / columns);
+            SoMatrix.add(SoLabelMatrix.getLabel(i / columns, i % columns), i % columns, i / columns);
         }
         SoMatrix.setAlignment(Pos.CENTER);
         SoMatrix.setVgap(5);
@@ -208,6 +202,8 @@ public class PandaHMACScreen {
 
         tab.setContent(vBox);
         tab.setClosable(false);
+        
+        LabelMatrix.setHoverEffects(kPlusLabelMatrix, opadLabelMatrix, SoLabelMatrix, cells, columns);
 
         return tab;
     }
@@ -402,6 +398,13 @@ public class PandaHMACScreen {
         tab.setClosable(false);
 
         return tab;
+    }
+    
+    private void setHoverEffects(GridPane leftOp, GridPane rightOp, GridPane result, int cells, int columns) {
+        for (int i = 0; i < cells; i++) {
+            // i = i / columns, j = i % columns
+            
+        }
     }
 
 }

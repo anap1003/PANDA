@@ -5,8 +5,14 @@
  */
 package panda_hmac;
 
+import control.State;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 /**
  *
@@ -40,6 +46,40 @@ public class LabelArray {
             array[len / 2] = new Label(" . . . . . . . . . ");
             array[len / 2].setStyle("-fx-border-color: black");
             array[len / 2].setAlignment(Pos.CENTER);
+            int cells = key.length() / 4;
+            int columns = 8;
+            switch (key.length() % 4) {
+                case 1:
+                    key += "   ";
+                    cells++;
+                    break;
+                case 2:
+                    key += "  ";
+                    cells++;
+                    break;
+                case 3:
+                    key += " ";
+                    cells++;
+                    break;
+            }
+            LabelMatrix opadLabelMatrix = new LabelMatrix(key, cells, columns);
+            GridPane valueMatrix = new GridPane();
+            for (int i = 0; i < cells; i++) {
+                valueMatrix.add(opadLabelMatrix.getLabel(i / columns, i % columns), i % columns, i / columns);
+            }
+            valueMatrix.setAlignment(Pos.CENTER);
+            valueMatrix.setVgap(5);
+            valueMatrix.setHgap(5);
+            Scene scene = new Scene(valueMatrix, PANDA_HMAC.WIDTH * 0.5, PANDA_HMAC.HEIGHT * 0.5);
+            array[len / 2].setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    Stage stage = new Stage();
+                    stage.setTitle("Prikaz kompletne vrednosti");
+                    stage.setScene(scene);
+                    stage.show();
+                }
+            });
         } else if (keyLen < (len + 1) * 4) {
             len = keyLen / 4 + (keyLen % 4 == 2 ? 1 : 0);
             array = new Label[len];

@@ -32,12 +32,12 @@ public class PandaKeyPaddingScreen {
             key = State.getInstance().getKey();
         }
         
-        Label paddedMessageLabel = new Label("Ključ dopunjen do b bita input-a hash funkcije:");
+        Label paddedMessageLabel = new Label("Ključ dopunjen do B bajtova input-a hash funkcije:");
         paddedMessageLabel.setStyle("-fx-font: 30 arial;");
         
         Button simBtn = new Button("Simulacija");
         simBtn.setOnAction((ActionEvent event) -> {
-            State.getInstance().calculateAll();
+            State.getInstance().calculateHMAC();
             SceneChanger.changeScene((new PandaHMACScreen()).getScreen());
         });
         simBtn.setPrefWidth(0.12 * PANDA_HMAC.WIDTH);

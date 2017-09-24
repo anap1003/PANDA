@@ -6,8 +6,11 @@
 package panda_hmac;
 
 import java.awt.Color;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
 import javax.swing.BorderFactory;
 
 /**
@@ -56,6 +59,68 @@ public class LabelMatrix {
     
     public Label getLabel(int row, int column) {
         return matrix[row][column];
+    }
+    
+    private void setBackgroundColor(int row, int column) {
+        matrix[row][column].setStyle("-fx-border-color: black; -fx-background-color:  #c5acec");
+    }
+    
+    private void clearBackgroundColor(int row, int column) {
+        matrix[row][column].setStyle("-fx-border-color: black");
+    }
+    
+    public static void setHoverEffects(LabelMatrix leftOp, LabelMatrix rightOp, LabelMatrix result, int cells, int columns) {
+        for (int i = 0; i < cells; i++) {
+            int j = i;
+            leftOp.getLabel(i / columns, i % columns).setOnMouseEntered(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    leftOp.setBackgroundColor(j / columns, j % columns);
+                    rightOp.setBackgroundColor(j / columns, j % columns);
+                    result.setBackgroundColor(j / columns, j % columns);
+                }
+            });
+            rightOp.getLabel(i / columns, i % columns).setOnMouseEntered(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    leftOp.setBackgroundColor(j / columns, j % columns);
+                    rightOp.setBackgroundColor(j / columns, j % columns);
+                    result.setBackgroundColor(j / columns, j % columns);
+                }
+            });
+            result.getLabel(i / columns, i % columns).setOnMouseEntered(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    leftOp.setBackgroundColor(j / columns, j % columns);
+                    rightOp.setBackgroundColor(j / columns, j % columns);
+                    result.setBackgroundColor(j / columns, j % columns);
+                }
+            });
+            leftOp.getLabel(i / columns, i % columns).setOnMouseExited(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    leftOp.clearBackgroundColor(j / columns, j % columns);
+                    rightOp.clearBackgroundColor(j / columns, j % columns);
+                    result.clearBackgroundColor(j / columns, j % columns);
+                }
+            });
+            rightOp.getLabel(i / columns, i % columns).setOnMouseExited(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    leftOp.clearBackgroundColor(j / columns, j % columns);
+                    rightOp.clearBackgroundColor(j / columns, j % columns);
+                    result.clearBackgroundColor(j / columns, j % columns);
+                }
+            });
+            result.getLabel(i / columns, i % columns).setOnMouseExited(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    leftOp.clearBackgroundColor(j / columns, j % columns);
+                    rightOp.clearBackgroundColor(j / columns, j % columns);
+                    result.clearBackgroundColor(j / columns, j % columns);
+                }
+            });
+        }
     }
     
 }

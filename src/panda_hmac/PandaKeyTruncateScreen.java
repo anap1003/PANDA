@@ -28,9 +28,9 @@ public class PandaKeyTruncateScreen {
         
         int cells = State.getInstance().getSelectedHash().getDigestCells();
         int columns = State.getInstance().getSelectedHash().getDigestColumns();
-        int length = columns - 1;
+        int length = 9;
         
-        Label paddedMessageLabel = new Label("Skraćivanje ključa na n bita izlaza heš funkcije:");
+        Label paddedMessageLabel = new Label("Skraćivanje ključa na L bajtova izlaza heš funkcije:");
         paddedMessageLabel.setStyle("-fx-font: 30 arial;");
         
         Button simBtn = new Button("Dopunjavanje");
@@ -67,7 +67,14 @@ public class PandaKeyTruncateScreen {
         GridPane array = new GridPane();
         array.setHgap(5);
         
-        LabelMatrix labelMatrix = new LabelMatrix(key, cells, columns);
+        LabelArray labelArray = new LabelArray(key, length);
+        GridPane beforeHArray = new GridPane();
+        for (int i = 0; i < length; i++) {
+            beforeHArray.add(labelArray.getLabel(i), i, 0);
+        }
+        beforeHArray.setAlignment(Pos.CENTER);
+        beforeHArray.setHgap(5);
+        /*LabelMatrix labelMatrix = new LabelMatrix(key, cells, columns);
         GridPane beforeHMatrix = new GridPane();
         for (int i = 0; i < cells; i++) {
             beforeHMatrix.add(labelMatrix.getLabel(i/columns, i%columns), i%columns, i/columns);
@@ -75,7 +82,8 @@ public class PandaKeyTruncateScreen {
         beforeHMatrix.setAlignment(Pos.CENTER);
         beforeHMatrix.setVgap(5);
         beforeHMatrix.setHgap(5);
-        vBox2.getChildren().add(beforeHMatrix);
+        vBox2.getChildren().add(beforeHMatrix);*/
+        vBox2.getChildren().add(beforeHArray);
         
         Button hashBtn = new Button("H");
         hashBtn.setPrefWidth(0.1 * PANDA_HMAC.WIDTH);
@@ -87,7 +95,7 @@ public class PandaKeyTruncateScreen {
         
         vBox2.getChildren().add(hashBtn);
         
-        labelMatrix = new LabelMatrix(newKey, cells, columns);
+        LabelMatrix labelMatrix = new LabelMatrix(newKey, cells, columns);
         GridPane afterHMatrix = new GridPane();
         for (int i = 0; i < cells; i++) {
             afterHMatrix.add(labelMatrix.getLabel(i/columns, i%columns), i%columns, i/columns);

@@ -27,14 +27,12 @@ public class PandaIntroScreen {
         imageView.setFitHeight(0.45 * Math.min(primaryStage.getHeight(), primaryStage.getWidth()));
         imageView.setFitWidth(0.45 * Math.min(primaryStage.getHeight(), primaryStage.getWidth()));
         
-        Text text = new Text("PANDA™ - Peškin i brAniN Diplomski rAd");
+        Text text = new Text("PANDA™ - Vizuelizacija HMAC algoritma sa SHA-3 heš funkcijom");
         text.setStyle("-fx-font: 24 arial;");
         
         Button btn = new Button();
         btn.setText("Početak");
         btn.setOnAction((ActionEvent event) -> {
-            /*primaryStage.setWidth(900);
-            primaryStage.setHeight(600);*/
             SceneChanger.changeScene((new PandaHashOptionScreen()).getScreen());
         });
         btn.setPrefWidth(imageView.getFitWidth());

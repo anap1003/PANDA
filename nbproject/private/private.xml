@@ -4,13 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/KoRiSnIk/Documents/NetBeansProjects/PANDA_HMAC/src/panda_hmac/PandaKeyPaddingScreen.java</file>
-            <file>file:/C:/Users/KoRiSnIk/Documents/NetBeansProjects/PANDA_HMAC/src/panda_hmac/PandaKeyTruncateScreen.java</file>
             <file>file:/C:/Users/KoRiSnIk/Documents/NetBeansProjects/PANDA_HMAC/src/panda_hmac/LabelMatrix.java</file>
-            <file>file:/C:/Users/KoRiSnIk/Documents/NetBeansProjects/PANDA_HMAC/src/panda_hmac/SceneChanger.java</file>
-            <file>file:/C:/Users/KoRiSnIk/Documents/NetBeansProjects/PANDA_HMAC/src/panda_hmac/PandaIntroScreen.java</file>
-            <file>file:/C:/Users/KoRiSnIk/Documents/NetBeansProjects/PANDA_HMAC/src/panda_hmac/PANDA_HMAC.java</file>
+            <file>file:/C:/Users/KoRiSnIk/Documents/NetBeansProjects/PANDA_HMAC/src/panda_hmac/PandaKeyTruncateScreen.java</file>
+            <file>file:/C:/Users/KoRiSnIk/Documents/NetBeansProjects/PANDA_HMAC/src/panda_hmac/LabelArray.java</file>
+            <file>file:/C:/Users/KoRiSnIk/Documents/NetBeansProjects/PANDA_HMAC/src/control/State.java</file>
+            <file>file:/C:/Users/KoRiSnIk/Documents/NetBeansProjects/PANDA_HMAC/src/control/HashInfo.java</file>
             <file>file:/C:/Users/KoRiSnIk/Documents/NetBeansProjects/PANDA_HMAC/src/panda_hmac/PandaHMACScreen.java</file>
-            <file>file:/C:/Users/KoRiSnIk/Documents/NetBeansProjects/PANDA_HMAC/src/panda_hmac/PandaHashOptionScreen.java</file>
         </group>
     </open-files>
 </project-private>

@@ -20,13 +20,6 @@ import javafx.stage.Stage;
  */
 public class PANDA_HMAC extends Application {
     
-    private Stage stage;
-    
-    private int step;
-    private int maxSteps;
-    
-    private Background defaultBackground;
-    
     public static int WIDTH = 1000, HEIGHT = 700;
     public static final int MAXIMUM_MESSAGE_LENGTH = 420;
     
@@ -44,18 +37,12 @@ public class PANDA_HMAC extends Application {
     public void start(Stage primaryStage) {
         initHashInfoMap();
         
-        VBox root = (new PandaIntroScreen()).getScreen(primaryStage);
-        
-        Scene scene = new Scene(root, WIDTH, HEIGHT);
-        
-        this.defaultBackground = root.getBackground();
-        
-        primaryStage.setTitle("PANDA - Vizuelizacija HMAC algoritma sa SHA-3 hash funkcijom");
-        primaryStage.setScene(scene);
-        
+        primaryStage.setTitle("PANDA - Vizuelizacija HMAC algoritma sa SHA-3 heš funkcijom");
         primaryStage.setResizable(false);
         
         SceneChanger.setStage(primaryStage);
+        
+        SceneChanger.changeScene((new PandaIntroScreen()).getScreen(primaryStage));
         
         primaryStage.show();
     }
